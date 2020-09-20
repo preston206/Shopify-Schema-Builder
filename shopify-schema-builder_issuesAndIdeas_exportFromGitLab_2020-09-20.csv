@@ -1,0 +1,29 @@
+Issue ID,URL,Title,State,Description,Author,Author Username,Assignee,Assignee Username,Confidential,Locked,Due Date,Created At (UTC),Updated At (UTC),Closed At (UTC),Milestone,Weight,Labels,Time Estimate,Time Spent
+1,https://gitlab.com/btownweb/internal/shopify-schema-builder/-/issues/1,Possible future option for working with existing schemas,Open,"Just gonna dump this here cause I was thinking about it.  If we launch it from the shell while in a specific Shopify theme directory, we could have a small Node server powering it and doing some processing.  It could be installed as a global npm package so that it can be run anywhere, and we could access the directory it was loaded from and offer the option to import the existing schemas from the theme for editing, something like:
+
+```javascript
+const themeSchema = JSON.parse(fs.readFileSync('src/sections/settings_schema.json', 'utf8'));
+const sectionSchemas = globby
+  .sync('src/sections/*.liquid')
+  .map((sectionFile) => {
+    const [, schema] = fs.readFileSync(sectionFile, 'utf8').match(/\{% ?schema ?%\}(.+?)\{% ?endschema ?%\}/);
+    if (! schema) {
+      return null;
+    }
+    return JSON.parse(schema);
+  })
+  .filter(schema => schema !== null);
+```",Matthew Peters,unsurebutgame,"","",No,No,,2020-05-15 20:36:44,2020-05-15 20:50:46,,,,Ideas,0,0
+2,https://gitlab.com/btownweb/internal/shopify-schema-builder/-/issues/2,Use faker library for fancier fake data prepopulation,Open,,Matthew Peters,unsurebutgame,"","",No,No,,2020-05-15 20:51:28,2020-05-15 20:51:28,,,,Ideas,0,0
+3,https://gitlab.com/btownweb/internal/shopify-schema-builder/-/issues/3,Ability to save schemas for reuse,Open,,Matthew Peters,unsurebutgame,"","",No,No,,2020-05-15 20:51:57,2020-05-15 20:51:57,,,,Ideas,0,0
+4,https://gitlab.com/btownweb/internal/shopify-schema-builder/-/issues/4,Predefined schemas for common things loaded with typical fields for quick start,Open,,Matthew Peters,unsurebutgame,"","",No,No,,2020-05-15 20:52:18,2020-05-15 20:52:18,,,,Ideas,0,0
+8,https://gitlab.com/btownweb/internal/shopify-schema-builder/-/issues/8,Display which types have been added,Open,"Maybe something like displaying the selected Types up near the ""Schema Code"" heading so we can quickly see what we've added. And maybe the ability to unselect\remove those types from there.
+
+E.g.
+Schema Code
+Selected Types: [Text x] [URL x] [Color x] [Range x]
+
+And then clicking the ""x"" would remove it",Preston Roberts,preston206,"","",No,No,,2020-06-04 17:28:38,2020-06-04 17:28:38,,,,Ideas,0,0
+10,https://gitlab.com/btownweb/internal/shopify-schema-builder/-/issues/10,Add the ability to copy the textarea with a single click,Open,There are javascript plugins\libraries available that will do that for us. I have used one a few years ago but I dont recall the name. I would need to go into one of old projects and find it. I'll research that and update this ticket.,Preston Roberts,preston206,"","",No,No,,2020-06-04 17:42:13,2020-06-04 17:42:13,,,,Ideas,0,0
+12,https://gitlab.com/btownweb/internal/shopify-schema-builder/-/issues/12,Use only one set of schema build buttons for empty shells and building out a whole schema,Open,"Right now, there are two sets of buttons: one for outputting empty schema shells and another set of buttons to build out a whole schema with all of the selected types. I have an idea that might make the app more user-friendly: remove the top row of buttons for the empty shells and only use the buttons in the right pane for both functions. The logic is already in place. Currently, if there are no types selected then it outputs a message stating that no types have been selected. Instead of that message, just output an empty shell.",Preston Roberts,preston206,"","",No,No,,2020-06-27 20:02:28,2020-06-27 20:02:28,,,,Ideas,0,0
+13,https://gitlab.com/btownweb/internal/shopify-schema-builder/-/issues/13,Liquid Block Code Snippet,Open,find a place to store a code snippet for looping over a schema block with Liquid. Maybe another button or trigger a popup modal or hover or something. Anything that would display the code so that we could copy it and then paste it into the page we're working on.,Preston Roberts,preston206,"","",No,No,,2020-07-13 21:08:57,2020-07-13 21:08:57,,,,Ideas,0,0
