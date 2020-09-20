@@ -1,0 +1,1225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shopify Schema Builder</title>
+  <script src="js/functions.js" defer></script>
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/layout.css">
+</head>
+
+<body>
+
+  <header class="container">
+
+    <div class="row">
+      <div class="col-16">
+        <h1 class="d-inline-block">Shopify Schema Builder</h1>
+        <p class="app-description d-inline-block">
+          Get code for individual schema types or build an entire schema
+        </p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-16 nav-container">
+        <p>Use these to get empty schema shells</p>
+        <nav>
+          <button onclick="getSchema('shell-dynamic')" id="btnEmptyDynamic" class="btn-primary" type="button">Dynamic</button>
+          <button onclick="getSchema('shell-dynamic-wb')" id="btnEmptyDynamicWithBlocks" class="btn-primary" type="button">Dynamic w/ Blocks</button>
+          <button onclick="getSchema('shell-static')" id="btnEmptyStatic" class="btn-primary" type="button">Static</button>
+          <button onclick="getSchema('shell-static-wb')" id="btnEmptyStaticWithBlocks" class="btn-primary" type="button">Static w/ Blocks</button>
+        </nav>
+      </div>
+    </div>
+
+  </header>
+
+  <main class="container">
+    <div class="row justify-content-between">
+
+      <!-- --------------------------------- -->
+      <!-- SCHEMA TYPES PANE -->
+      <!-- --------------------------------- -->
+      <section class="col-9 schema-types-section">
+
+        <div class="d-flex">
+          <h2 class="schema-types-main-heading">Schema Types</h2>
+
+          <!-- Type Finder -->
+          <select name="typeFinder" id="typeFinder" onchange="scrollToType(this)">
+            <option value="none" disabled selected>Type Picker</option>
+            <option value="header_heading">Header</option>
+            <option value="paragraph_heading">Paragraph</option>
+            <option value="text_heading">Text</option>
+            <option value="url_heading">URL</option>
+            <option value="color_heading">Color</option>
+            <option value="image_picker_heading">Image Picker</option>
+            <option value="range_heading">Range</option>
+            <option value="link_list_heading">Link List</option>
+            <option value="select_heading">Select</option>
+            <option value="checkbox_heading">Checkbox</option>
+            <option value="radio_heading">Radio</option>
+            <option value="textarea_heading">Textarea</option>
+            <option value="richtext_heading">Richtext</option>
+            <option value="html_heading">HTML</option>
+            <option value="collection_heading">Collection Picker</option>
+            <option value="product_heading">Product Picker</option>
+            <option value="page_heading">Page Picker</option>
+            <option value="blog_heading">Blog Picker</option>
+            <option value="article_heading">Article Picker</option>
+            <option value="font_picker_heading">Font Picker</option>
+            <option value="video_heading">Video Picker</option>
+          </select>
+        </div>
+
+        <div class="types-container">
+
+          <!-- --------------------------------- -->
+          <!-- HEADER -->
+          <!-- Category: Informative -->
+          <!-- --------------------------------- -->
+          <div class="type type--informative">
+            <div class="type__header">
+              <h3 class="type-heading" id="header_heading">HEADER</h3>
+
+              <div class="d-flex justify-content-between align-items-end">
+                <div class="setting d-flex align-items-end">
+                  <input type="text" placeholder="Content" id="header_content" title="Content">
+                </div>
+
+                <div class="add-to-schema-container d-flex justify-content-between align-items-center">
+                  <input class="add-to-schema-checkbox" type="checkbox" data-shopify-type="header" data-cat="Informative" id="header_add" onchange="toggleIndicator(event)">
+                  <label for="header_add">Add To Schema</label>
+                </div>
+
+                <div class="qty-container d-flex align-items-end">
+                  <label class="quantity-label" for="header_qty">Quantity</label>
+                  <input type="number" class="quantity-input" value="1" id="header_qty" min="1" onchange="quantityValidator(event)">
+                </div>
+
+                <button id="header" data-shopify-type="header" class="btn-primary" type="button" onclick="getType(event.target.id, 'informative')">Get This Type</button>
+              </div>
+            </div>
+          </div>
+
+
+
+          <!-- --------------------------------- -->
+          <!-- PARAGRAPH -->
+          <!-- Category: Informative -->
+          <!-- --------------------------------- -->
+          <div class="type type--informative">
+            <div class="type__header">
+              <h3 class="type-heading" id="paragraph_heading">PARAGRAPH</h3>
+
+              <div class="d-flex justify-content-between align-items-end">
+                <div class="setting d-flex align-items-end">
+                  <input type="text" placeholder="Content" id="paragraph_content" title="Content">
+                </div>
+
+                <div class="add-to-schema-container d-flex justify-content-between align-items-center">
+                  <input class="add-to-schema-checkbox" type="checkbox" data-shopify-type="paragraph" data-cat="Informative" id="paragraph_add" onchange="toggleIndicator(event)">
+                  <label for="paragraph_add">Add To Schema</label>
+                </div>
+
+                <div class="qty-container d-flex align-items-end">
+                  <label class="quantity-label" for="paragraph_qty">Quantity</label>
+                  <input type="number" class="quantity-input" value="1" id="paragraph_qty" min="1" onchange="quantityValidator(event)">
+                </div>
+
+                <button id="paragraph" data-shopify-type="paragraph" class="btn-primary" type="button" onclick="getType(event.target.id, 'informative')">Get This Type</button>
+              </div>
+            </div>
+          </div>
+
+
+
+          <!-- --------------------------------- -->
+          <!-- TEXT -->
+          <!-- Category: Standard -->
+          <!-- --------------------------------- -->
+          <div class="type type--standard">
+            <div class="type__header">
+              <h3 class="type-heading" id="text_heading">TEXT</h3>
+
+              <div class="settings--core d-flex justify-content-between">
+                <div class="setting d-flex align-items-end">
+                  <input type="text" placeholder="ID" id="text_id" title="ID">
+                </div>
+  
+                <div class="setting d-flex align-items-end">
+                  <input type="text" placeholder="Label" id="text_label" title="Label">
+                </div>
+  
+                <div class="setting d-flex flex-column justify-content-end">
+                  <div>
+                    <input type="checkbox" id="text_default_exclude" checked>
+                    <label class="d-inline-block" for="text_default_exclude">Exclude</label>
+                  </div>
+                  <input type="text" placeholder="Default" id="text_default" title="Default">
+                </div>
+  
+                <div class="setting d-flex flex-column justify-content-end">
+                  <div>
+                    <input type="checkbox" id="text_info_exclude" checked>
+                    <label class="d-inline-block" for="text_info_exclude">Exclude</label>
+                  </div>
+                  <input type="text" placeholder="Info" id="text_info" title="Info">
+                </div>
+              </div>
+            </div>
+
+            <div class="type__body">
+              <div class="settings--actions d-flex justify-content-between">
+                <div class="add-to-schema-container d-flex justify-content-between align-items-center">
+                  <input class="add-to-schema-checkbox" type="checkbox" data-shopify-type="text" data-cat="Standard" id="text_add" onchange="toggleIndicator(event)">
+                  <label for="text_add">Add To Schema</label>
+                </div>
+
+                <div class="qty-container d-flex align-items-end">
+                  <label class="quantity-label" for="text_qty">Quantity</label>
+                  <input type="number" class="quantity-input" value="1" id="text_qty" min="1" onchange="quantityValidator(event)">
+                </div>
+
+                <button id="text" data-shopify-type="text" class="btn-primary" type="button" onclick="getType(event.target.id, 'standard')">Get This Type</button>
+              </div>
+            </div>
+          </div>
+
+
+
+          <!-- --------------------------------- -->
+          <!-- URL -->
+          <!-- Category: No Default -->
+          <!-- --------------------------------- -->
+          <div class="type type--no-default">
+            <div class="type__header">
+              <h3 class="type-heading" id="url_heading">URL</h3>
+
+              <div class="settings--core d-flex justify-content-between">
+                <div class="setting d-flex align-items-end">
+                  <input type="text" placeholder="ID" id="url_id" title="ID">
+                </div>
+  
+                <div class="setting d-flex align-items-end">
+                  <input type="text" placeholder="Label" id="url_label" title="Label">
+                </div>
+  
+                <div class="setting d-flex flex-column justify-content-end">
+                  <div>
+                    <input type="checkbox" id="url_info_exclude" checked>
+                    <label class="d-inline-block" for="url_info_exclude">Exclude</label>
+                  </div>
+                  <input type="text" placeholder="Info" id="url_info" title="Info">
+                </div>
+              </div>
+            </div>
+
+            <div class="type__body">
+              <div class="settings--actions d-flex justify-content-between">
+                <div class="add-to-schema-container d-flex justify-content-between align-items-center">
+                  <input class="add-to-schema-checkbox" type="checkbox" data-shopify-type="url" data-cat="NoDefault" id="url_add" onchange="toggleIndicator(event)">
+                  <label for="url_add">Add To Schema</label>
+                </div>
+
+                <div class="qty-container d-flex align-items-end">
+                  <label class="quantity-label" for="url_qty">Quantity</label>
+                  <input type="number" class="quantity-input" value="1" id="url_qty" min="1" onchange="quantityValidator(event)">
+                </div>
+
+                <button id="url" data-shopify-type="url" class="btn-primary" type="button" onclick="getType(event.target.id, 'no-default')">Get This Type</button>
+              </div>
+              
+            </div>
+          </div>
+
+
+
+          <!-- --------------------------------- -->
+          <!-- COLOR -->
+          <!-- Category: Standard -->
+          <!-- --------------------------------- -->
+          <div class="type type--standard">
+            <div class="type__header">
+              <h3 class="type-heading" id="color_heading">COLOR</h3>
+
+              <div class="settings--core d-flex justify-content-between">
+                <div class="setting d-flex align-items-end">
+                  <input type="text" placeholder="ID" id="color_id" title="ID">
+                </div>
+  
+                <div class="setting d-flex align-items-end">
+                  <input type="text" placeholder="Label" id="color_label" title="Label">
+                </div>
+  
+                <div class="setting d-flex flex-column justify-content-end">
+                  <div>
+                    <input type="checkbox" id="color_default_exclude" checked>
+                    <label class="d-inline-block" for="color_default_exclude">Exclude</label>
+                  </div>
+                  <input type="text" placeholder="Default" id="color_default" title="Default">
+                </div>
+  
+                <div class="setting d-flex flex-column justify-content-end">
+                  <div>
+                    <input type="checkbox" id="color_info_exclude" checked>
+                    <label class="d-inline-block" for="color_info_exclude">Exclude</label>
+                  </div>
+                  <input type="text" placeholder="Info" id="color_info" title="Info">
+                </div>
+              </div>
+            </div>
+
+            <div class="type__body">
+              <div class="settings--actions d-flex justify-content-between">
+                <div class="add-to-schema-container d-flex justify-content-between align-items-center">
+                  <input class="add-to-schema-checkbox" type="checkbox" data-shopify-type="color" data-cat="Standard" id="color_add" onchange="toggleIndicator(event)">
+                  <label for="color_add">Add To Schema</label>
+                </div>
+
+                <div class="qty-container d-flex align-items-end">
+                  <label class="quantity-label" for="color_qty">Quantity</label>
+                  <input type="number" class="quantity-input" value="1" id="color_qty" min="1" onchange="quantityValidator(event)">
+                </div>
+
+                <button id="color" data-shopify-type="color" class="btn-primary" type="button" onclick="getType(event.target.id, 'standard')">Get This Type</button>
+              </div>
+            </div>
+          </div>
+
+
+
+          <!-- --------------------------------- -->
+          <!-- IMAGE PICKER -->
+          <!-- Category: No Default -->
+          <!-- --------------------------------- -->
+          <div class="type type--no-default">
+            <div class="type__header">
+              <h3 class="type-heading" id="image_picker_heading">IMAGE PICKER</h3>
+
+              <div class="settings--core d-flex justify-content-between">
+                <div class="setting d-flex align-items-end">
+                  <input type="text" placeholder="ID" id="image_picker_id" title="ID">
+                </div>
+  
+                <div class="setting d-flex align-items-end">
+                  <input type="text" placeholder="Label" id="image_picker_label" title="Label">
+                </div>
+  
+                <div class="setting d-flex flex-column justify-content-end">
+                  <div>
+                    <input type="checkbox" id="image_picker_info_exclude" checked>
+                    <label class="d-inline-block" for="image_picker_info_exclude">Exclude</label>
+                  </div>
+                  <input type="text" placeholder="Info" id="image_picker_info" title="Info">
+                </div>
+              </div>
+            </div>
+
+            <div class="type__body">
+              <div class="settings--actions d-flex justify-content-between">
+                <div class="add-to-schema-container d-flex justify-content-between align-items-center">
+                  <input class="add-to-schema-checkbox" type="checkbox" data-shopify-type="image_picker" data-cat="NoDefault" id="image_picker_add" onchange="toggleIndicator(event)">
+                  <label for="image_picker_add">Add To Schema</label>
+                </div>
+
+                <div class="qty-container d-flex align-items-end">
+                  <label class="quantity-label" for="image_picker_qty">Quantity</label>
+                  <input type="number" class="quantity-input" value="1" id="image_picker_qty" min="1" onchange="quantityValidator(event)">
+                </div>
+
+                <button id="image_picker" data-shopify-type="image_picker" class="btn-primary" type="button" onclick="getType(event.target.id, 'no-default')">Get This Type</button>
+              </div>
+              
+            </div>
+          </div>
+
+
+
+          <!-- --------------------------------- -->
+          <!-- RANGE -->
+          <!-- Category: Range -->
+          <!-- --------------------------------- -->
+          <div class="type type--range">
+            <div class="type__header">
+              <h3 class="type-heading" id="range_heading">RANGE</h3>
+
+              <div class="settings--core d-flex justify-content-between">
+                <div class="setting d-flex align-items-end">
+                  <input type="text" placeholder="ID" id="range_id" title="ID">
+                </div>
+
+                <div class="setting d-flex align-items-end">
+                  <input type="text" placeholder="Label" id="range_label" title="Label">
+                </div>
+  
+                <div class="setting d-flex flex-column justify-content-end">
+                  <input type="number" placeholder="Default" id="range_default" title="Default" onchange="quantityValidator(event)">
+                </div>
+  
+                <div class="setting d-flex flex-column justify-content-end">
+                  <div>
+                    <input type="checkbox" id="range_info_exclude" checked>
+                    <label class="d-inline-block" for="range_info_exclude">Exclude</label>
+                  </div>
+                  <input type="text" placeholder="Info" id="range_info" title="Info">
+                </div>
+              </div>
+            </div>
+
+            <div class="type__body">
+              <div class="settings--extra d-flex justify-content-between">
+                <div class="setting d-flex align-items-end">
+                  <p class="settings--extra__label">Specs:</p>
+                </div>
+  
+                <div class="setting d-flex align-items-end">
+                  <input type="number" placeholder="Min" id="range_spec_min" title="Min" onchange="quantityValidator(event)">
+                </div>
+  
+                <div class="setting d-flex flex-column justify-content-end">
+                  <input type="number" placeholder="Max" id="range_spec_max" title="Max" onchange="quantityValidator(event)">
+                </div>
+  
+                <div class="setting d-flex flex-column justify-content-end">
+                  <input type="number" placeholder="Step" id="range_spec_step" title="Step" onchange="quantityValidator(event)">
+                </div>
+  
+                <div class="setting d-flex flex-column justify-content-end">
+                  <input type="text" placeholder="Unit" id="range_spec_unit" title="Unit" maxlength="3">
+                </div>
+              </div>
+            </div>
+
+            <div class="type__footer">
+              <div class="settings-actions d-flex justify-content-between">
+                <div class="add-to-schema-container d-flex justify-content-between align-items-center">
+                  <input class="add-to-schema-checkbox" type="checkbox" data-shopify-type="range" data-cat="Range" id="range_add" onchange="toggleIndicator(event)">
+                  <label for="range_add">Add To Schema</label>
+                </div>
+
+                <div class="qty-container d-flex align-items-end">
+                  <label class="quantity-label" for="range_qty">Quantity</label>
+                  <input type="number" class="quantity-input" value="1" id="range_qty" min="1" onchange="quantityValidator(event)">
+                </div>
+
+                <button id="range" data-shopify-type="range" class="btn-primary" type="button" onclick="getType(event.target.id, 'range')">Get This Type</button>
+              </div>
+            </div>
+          </div>
+
+
+
+          <!-- --------------------------------- -->
+          <!-- LINK LIST -->
+          <!-- Category: No Default -->
+          <!-- --------------------------------- -->
+          <div class="type type--no-default">
+            <div class="type__header">
+              <h3 class="type-heading" id="link_list_heading">LINK LIST</h3>
+
+              <div class="settings--core d-flex justify-content-between">
+                <div class="setting d-flex align-items-end">
+                  <input type="text" placeholder="ID" id="link_list_id" title="ID">
+                </div>
+  
+                <div class="setting d-flex align-items-end">
+                  <input type="text" placeholder="Label" id="link_list_label" title="Label">
+                </div>
+  
+                <div class="setting d-flex flex-column justify-content-end">
+                  <div>
+                    <input type="checkbox" id="link_list_info_exclude" checked>
+                    <label class="d-inline-block" for="link_list_info_exclude">Exclude</label>
+                  </div>
+                  <input type="text" placeholder="Info" id="link_list_info" title="Info">
+                </div>
+              </div>
+            </div>
+
+            <div class="type__body">
+              <div class="settings--actions d-flex justify-content-between">
+                <div class="add-to-schema-container d-flex justify-content-between align-items-center">
+                  <input class="add-to-schema-checkbox" type="checkbox" data-shopify-type="link_list" data-cat="NoDefault" id="link_list_add" onchange="toggleIndicator(event)">
+                  <label for="link_list_add">Add To Schema</label>
+                </div>
+
+                <div class="qty-container d-flex align-items-end">
+                  <label class="quantity-label" for="link_list_qty">Quantity</label>
+                  <input type="number" class="quantity-input" value="1" id="link_list_qty" min="1" onchange="quantityValidator(event)">
+                </div>
+
+                <button id="link_list" data-shopify-type="link_list" class="btn-primary" type="button" onclick="getType(event.target.id, 'no-default')">Get This Type</button>
+              </div>
+              
+            </div>
+          </div>
+
+
+
+          <!-- --------------------------------- -->
+          <!-- SELECT -->
+          <!-- Category: Options -->
+          <!-- --------------------------------- -->
+          <div class="type type--options">
+            <div class="type__header">
+              <h3 class="type-heading" id="select_heading">SELECT</h3>
+
+              <div class="settings--core d-flex justify-content-between">
+                <div class="setting d-flex align-items-end">
+                  <input type="text" placeholder="ID" id="select_id" title="ID">
+                </div>
+  
+                <div class="setting d-flex align-items-end">
+                  <input type="text" placeholder="Label" id="select_label" title="Label">
+                </div>
+  
+                <div class="setting d-flex flex-column justify-content-end">
+                  <input type="text" placeholder="Default" id="select_default" title="Default">
+                </div>
+  
+                <div class="setting d-flex flex-column justify-content-end">
+                  <div>
+                    <input type="checkbox" id="select_info_exclude" checked>
+                    <label class="d-inline-block" for="select_info_exclude">Exclude</label>
+                  </div>
+                  <input type="text" placeholder="Info" id="select_info" title="Info">
+                </div>
+              </div>
+            </div>
+
+            <div class="type__body">
+              <div class="settings--extra d-flex justify-content-between">
+                <div class="setting d-flex align-items-end">
+                  <p class="settings--extra__label">Options:</p>
+                </div>
+  
+                <div class="setting d-flex align-items-end">
+                  <input type="text" placeholder="Option Value" id="select_option_value" title="Value">
+                </div>
+  
+                <div class="setting d-flex flex-column justify-content-end">
+                  <input type="text" placeholder="Option Label" id="select_option_label" title="Label">
+                </div>
+  
+                <div class="setting d-flex flex-column justify-content-end">
+                  <input type="number" class="quantity" value="1" placeholder="Quantity" id="select_option_qty" title="Options quantity" onchange="quantityValidator(event)">
+                </div>
+              </div>
+            </div>
+
+            <div class="type__footer">
+              <div class="settings--actions d-flex justify-content-between">
+                <div class="add-to-schema-container d-flex justify-content-between align-items-center">
+                  <input class="add-to-schema-checkbox" type="checkbox" data-shopify-type="select" data-cat="Options" id="select_add" onchange="toggleIndicator(event)">
+                  <label for="select_add">Add To Schema</label>
+                </div>
+
+                <div class="qty-container d-flex align-items-end">
+                  <label class="quantity-label" for="select_qty">Quantity</label>
+                  <input type="number" class="quantity-input" value="1" id="select_qty" min="1" onchange="quantityValidator(event)">
+                </div>
+
+                <button id="select" data-shopify-type="select" class="btn-primary" type="button" onclick="getType(event.target.id, 'options')">Get This Type</button>
+              </div>
+            </div>
+          </div>
+
+
+
+          <!-- --------------------------------- -->
+          <!-- CHECKBOX -->
+          <!-- Category: Standard -->
+          <!-- --------------------------------- -->
+          <div class="type type--standard">
+            <div class="type__header">
+              <h3 class="type-heading" id="checkbox_heading">CHECKBOX</h3>
+
+              <div class="settings--core d-flex justify-content-between">
+                <div class="setting d-flex align-items-end">
+                  <input type="text" placeholder="ID" id="checkbox_id" title="ID">
+                </div>
+  
+                <div class="setting d-flex align-items-end">
+                  <input type="text" placeholder="Label" id="checkbox_label" title="Label">
+                </div>
+  
+                <div class="setting d-flex flex-column justify-content-end">
+                  <div>
+                    <input type="checkbox" id="checkbox_default_exclude" checked>
+                    <label class="d-inline-block" for="checkbox_default_exclude">Exclude</label>
+                  </div>
+                  <input type="text" placeholder="Default: True/False" id="checkbox_default" title="Default">
+                </div>
+  
+                <div class="setting d-flex flex-column justify-content-end">
+                  <div>
+                    <input type="checkbox" id="checkbox_info_exclude" checked>
+                    <label class="d-inline-block" for="checkbox_info_exclude">Exclude</label>
+                  </div>
+                  <input type="text" placeholder="Info" id="checkbox_info" title="Info">
+                </div>
+              </div>
+            </div>
+
+            <div class="type__body">
+              <div class="settings--actions d-flex justify-content-between">
+                <div class="add-to-schema-container d-flex justify-content-between align-items-center">
+                  <input class="add-to-schema-checkbox" type="checkbox" data-shopify-type="checkbox" data-cat="Standard" id="checkbox_add" onchange="toggleIndicator(event)">
+                  <label for="checkbox_add">Add To Schema</label>
+                </div>
+
+                <div class="qty-container d-flex align-items-end">
+                  <label class="quantity-label" for="checkbox_qty">Quantity</label>
+                  <input type="number" class="quantity-input" value="1" id="checkbox_qty" min="1" onchange="quantityValidator(event)">
+                </div>
+
+                <button id="checkbox" data-shopify-type="checkbox" class="btn-primary" type="button" onclick="getType(event.target.id, 'standard')">Get This Type</button>
+              </div>
+            </div>
+          </div>
+
+
+
+          <!-- --------------------------------- -->
+          <!-- RADIO -->
+          <!-- Category: Options -->
+          <!-- --------------------------------- -->
+          <div class="type type--options">
+            <div class="type__header">
+              <h3 class="type-heading" id="radio_heading">RADIO</h3>
+
+              <div class="settings--core d-flex justify-content-between">
+                <div class="setting d-flex align-items-end">
+                  <input type="text" placeholder="ID" id="radio_id" title="ID">
+                </div>
+  
+                <div class="setting d-flex align-items-end">
+                  <input type="text" placeholder="Label" id="radio_label" title="Label">
+                </div>
+  
+                <div class="setting d-flex flex-column justify-content-end">
+                  <input type="text" placeholder="Default" id="radio_default" title="Default">
+                </div>
+  
+                <div class="setting d-flex flex-column justify-content-end">
+                  <div>
+                    <input type="checkbox" id="radio_info_exclude" checked>
+                    <label class="d-inline-block" for="radio_info_exclude">Exclude</label>
+                  </div>
+                  <input type="text" placeholder="Info" id="radio_info" title="Info">
+                </div>
+              </div>
+            </div>
+
+            <div class="type__body">
+              <div class="settings--extra d-flex justify-content-between">
+                <div class="setting d-flex align-items-end">
+                  <p class="settings--extra__label">Options:</p>
+                </div>
+  
+                <div class="setting d-flex align-items-end">
+                  <input type="text" placeholder="Option Value" id="radio_option_value" title="Value">
+                </div>
+  
+                <div class="setting d-flex flex-column justify-content-end">
+                  <input type="text" placeholder="Option Label" id="radio_option_label" title="Label">
+                </div>
+  
+                <div class="setting d-flex flex-column justify-content-end">
+                  <input type="number" class="quantity" value="1" placeholder="Quantity" id="radio_option_qty" title="Options quantity" onchange="quantityValidator(event)">
+                </div>
+              </div>
+            </div>
+
+            <div class="type__footer">
+              <div class="settings--actions d-flex justify-content-between">
+                <div class="add-to-schema-container d-flex justify-content-between align-items-center">
+                  <input class="add-to-schema-checkbox" type="checkbox" data-shopify-type="radio" data-cat="Options" id="radio_add" onchange="toggleIndicator(event)">
+                  <label for="radio_add">Add To Schema</label>
+                </div>
+
+                <div class="qty-container d-flex align-items-end">
+                  <label class="quantity-label" for="radio_qty">Quantity</label>
+                  <input type="number" class="quantity-input" value="1" id="radio_qty" min="1" onchange="quantityValidator(event)">
+                </div>
+
+                <button id="radio" data-shopify-type="radio" class="btn-primary" type="button" onclick="getType(event.target.id, 'options')">Get This Type</button>
+              </div>
+            </div>
+          </div>
+
+
+
+          <!-- --------------------------------- -->
+          <!-- TEXTAREA -->
+          <!-- Category: Standard -->
+          <!-- --------------------------------- -->
+          <div class="type type--standard">
+            <div class="type__header">
+              <h3 class="type-heading" id="textarea_heading">TEXTAREA</h3>
+
+              <div class="settings--core d-flex justify-content-between">
+                <div class="setting d-flex align-items-end">
+                  <input type="text" placeholder="ID" id="textarea_id" title="ID">
+                </div>
+  
+                <div class="setting d-flex align-items-end">
+                  <input type="text" placeholder="Label" id="textarea_label" title="Label">
+                </div>
+  
+                <div class="setting d-flex flex-column justify-content-end">
+                  <div>
+                    <input type="checkbox" id="textarea_default_exclude" checked>
+                    <label class="d-inline-block" for="textarea_default_exclude">Exclude</label>
+                  </div>
+                  <input type="text" placeholder="Default" id="textarea_default" title="Default">
+                </div>
+  
+                <div class="setting d-flex flex-column justify-content-end">
+                  <div>
+                    <input type="checkbox" id="textarea_info_exclude" checked>
+                    <label class="d-inline-block" for="textarea_info_exclude">Exclude</label>
+                  </div>
+                  <input type="text" placeholder="Info" id="textarea_info" title="Info">
+                </div>
+              </div>
+            </div>
+
+            <div class="type__body">
+              <div class="settings--actions d-flex justify-content-between">
+                <div class="add-to-schema-container d-flex justify-content-between align-items-center">
+                  <input class="add-to-schema-checkbox" type="checkbox" data-shopify-type="textarea" data-cat="Standard" id="textarea_add" onchange="toggleIndicator(event)">
+                  <label for="textarea_add">Add To Schema</label>
+                </div>
+
+                <div class="qty-container d-flex align-items-end">
+                  <label class="quantity-label" for="textarea_qty">Quantity</label>
+                  <input type="number" class="quantity-input" value="1" id="textarea_qty" min="1" onchange="quantityValidator(event)">
+                </div>
+
+                <button id="textarea" data-shopify-type="textarea" class="btn-primary" type="button" onclick="getType(event.target.id, 'standard')">Get This Type</button>
+              </div>
+            </div>
+          </div>
+
+
+
+          <!-- --------------------------------- -->
+          <!-- RICHTEXT -->
+          <!-- Category: Standard -->
+          <!-- --------------------------------- -->
+          <div class="type type--standard">
+            <div class="type__header">
+              <h3 class="type-heading" id="richtext_heading">RICHTEXT</h3>
+
+              <div class="settings--core d-flex justify-content-between">
+                <div class="setting d-flex align-items-end">
+                  <input type="text" placeholder="ID" id="richtext_id" title="ID">
+                </div>
+  
+                <div class="setting d-flex align-items-end">
+                  <input type="text" placeholder="Label" id="richtext_label" title="Label">
+                </div>
+  
+                <div class="setting d-flex flex-column justify-content-end">
+                  <div>
+                    <input type="checkbox" id="richtext_default_exclude" checked>
+                    <label class="d-inline-block" for="richtext_default_exclude">Exclude</label>
+                  </div>
+                  <input type="text" placeholder="Default" id="richtext_default" title="Default">
+                </div>
+  
+                <div class="setting d-flex flex-column justify-content-end">
+                  <div>
+                    <input type="checkbox" id="richtext_info_exclude" checked>
+                    <label class="d-inline-block" for="richtext_info_exclude">Exclude</label>
+                  </div>
+                  <input type="text" placeholder="Info" id="richtext_info" title="Info">
+                </div>
+              </div>
+            </div>
+
+            <div class="type__body">
+              <div class="settings--actions d-flex justify-content-between">
+                <div class="add-to-schema-container d-flex justify-content-between align-items-center">
+                  <input class="add-to-schema-checkbox" type="checkbox" data-shopify-type="richtext" data-cat="Standard" id="richtext_add" onchange="toggleIndicator(event)">
+                  <label for="richtext_add">Add To Schema</label>
+                </div>
+
+                <div class="qty-container d-flex align-items-end">
+                  <label class="quantity-label" for="richtext_qty">Quantity</label>
+                  <input type="number" class="quantity-input" value="1" id="richtext_qty" min="1" onchange="quantityValidator(event)">
+                </div>
+
+                <button id="richtext" data-shopify-type="richtext" class="btn-primary" type="button" onclick="getType(event.target.id, 'standard')">Get This Type</button>
+              </div>
+            </div>
+          </div>
+
+
+
+          <!-- --------------------------------- -->
+          <!-- HTML -->
+          <!-- Category: Standard -->
+          <!-- --------------------------------- -->
+          <div class="type type--standard">
+            <div class="type__header">
+              <h3 class="type-heading" id="html_heading">HTML</h3>
+
+              <div class="settings--core d-flex justify-content-between">
+                <div class="setting d-flex align-items-end">
+                  <input type="text" placeholder="ID" id="html_id" title="ID">
+                </div>
+  
+                <div class="setting d-flex align-items-end">
+                  <input type="text" placeholder="Label" id="html_label" title="Label">
+                </div>
+  
+                <div class="setting d-flex flex-column justify-content-end">
+                  <div>
+                    <input type="checkbox" id="html_default_exclude" checked>
+                    <label class="d-inline-block" for="html_default_exclude">Exclude</label>
+                  </div>
+                  <input type="text" placeholder="Default" id="html_default" title="Default">
+                </div>
+  
+                <div class="setting d-flex flex-column justify-content-end">
+                  <div>
+                    <input type="checkbox" id="html_info_exclude" checked>
+                    <label class="d-inline-block" for="html_info_exclude">Exclude</label>
+                  </div>
+                  <input type="text" placeholder="Info" id="html_info" title="Info">
+                </div>
+              </div>
+            </div>
+
+            <div class="type__body">
+              <div class="settings--actions d-flex justify-content-between">
+                <div class="add-to-schema-container d-flex justify-content-between align-items-center">
+                  <input class="add-to-schema-checkbox" type="checkbox" data-shopify-type="html" data-cat="Standard" id="html_add" onchange="toggleIndicator(event)">
+                  <label for="html_add">Add To Schema</label>
+                </div>
+
+                <div class="qty-container d-flex align-items-end">
+                  <label class="quantity-label" for="html_qty">Quantity</label>
+                  <input type="number" class="quantity-input" value="1" id="html_qty" min="1" onchange="quantityValidator(event)">
+                </div>
+
+                <button id="html" data-shopify-type="html" class="btn-primary" type="button" onclick="getType(event.target.id, 'standard')">Get This Type</button>
+              </div>
+            </div>
+          </div>
+
+
+
+          <!-- --------------------------------- -->
+          <!-- COLLECTION -->
+          <!-- Category: No Default -->
+          <!-- --------------------------------- -->
+          <div class="type type--no-default">
+            <div class="type__header">
+              <h3 class="type-heading" id="collection_heading">COLLECTION</h3>
+
+              <div class="settings--core d-flex justify-content-between">
+                <div class="setting d-flex align-items-end">
+                  <input type="text" placeholder="ID" id="collection_id" title="ID">
+                </div>
+  
+                <div class="setting d-flex align-items-end">
+                  <input type="text" placeholder="Label" id="collection_label" title="Label">
+                </div>
+  
+                <div class="setting d-flex flex-column justify-content-end">
+                  <div>
+                    <input type="checkbox" id="collection_info_exclude" checked>
+                    <label class="d-inline-block" for="collection_info_exclude">Exclude</label>
+                  </div>
+                  <input type="text" placeholder="Info" id="collection_info" title="Info">
+                </div>
+              </div>
+            </div>
+
+            <div class="type__body">
+              <div class="settings--actions d-flex justify-content-between">
+                <div class="add-to-schema-container d-flex justify-content-between align-items-center">
+                  <input class="add-to-schema-checkbox" type="checkbox" data-shopify-type="collection" data-cat="NoDefault" id="collection_add" onchange="toggleIndicator(event)">
+                  <label for="collection_add">Add To Schema</label>
+                </div>
+
+                <div class="qty-container d-flex align-items-end">
+                  <label class="quantity-label" for="collection_qty">Quantity</label>
+                  <input type="number" class="quantity-input" value="1" id="collection_qty" min="1" onchange="quantityValidator(event)">
+                </div>
+
+                <button id="collection" data-shopify-type="collection" class="btn-primary" type="button" onclick="getType(event.target.id, 'no-default')">Get This Type</button>
+              </div>
+              
+            </div>
+          </div>
+
+
+
+          <!-- --------------------------------- -->
+          <!-- PRODUCT -->
+          <!-- Category: No Default -->
+          <!-- --------------------------------- -->
+          <div class="type type--no-default">
+            <div class="type__header">
+              <h3 class="type-heading" id="product_heading">PRODUCT</h3>
+
+              <div class="settings--core d-flex justify-content-between">
+                <div class="setting d-flex align-items-end">
+                  <input type="text" placeholder="ID" id="product_id" title="ID">
+                </div>
+  
+                <div class="setting d-flex align-items-end">
+                  <input type="text" placeholder="Label" id="product_label" title="Label">
+                </div>
+  
+                <div class="setting d-flex flex-column justify-content-end">
+                  <div>
+                    <input type="checkbox" id="product_info_exclude" checked>
+                    <label class="d-inline-block" for="product_info_exclude">Exclude</label>
+                  </div>
+                  <input type="text" placeholder="Info" id="product_info" title="Info">
+                </div>
+              </div>
+            </div>
+
+            <div class="type__body">
+              <div class="settings--actions d-flex justify-content-between">
+                <div class="add-to-schema-container d-flex justify-content-between align-items-center">
+                  <input class="add-to-schema-checkbox" type="checkbox" data-shopify-type="product" data-cat="NoDefault" id="product_add" onchange="toggleIndicator(event)">
+                  <label for="product_add">Add To Schema</label>
+                </div>
+
+                <div class="qty-container d-flex align-items-end">
+                  <label class="quantity-label" for="product_qty">Quantity</label>
+                  <input type="number" class="quantity-input" value="1" id="product_qty" min="1" onchange="quantityValidator(event)">
+                </div>
+
+                <button id="product" data-shopify-type="product" class="btn-primary" type="button" onclick="getType(event.target.id, 'no-default')">Get This Type</button>
+              </div>
+              
+            </div>
+          </div>
+
+
+
+          <!-- --------------------------------- -->
+          <!-- PAGE -->
+          <!-- Category: No Default -->
+          <!-- --------------------------------- -->
+          <div class="type type--no-default">
+            <div class="type__header">
+              <h3 class="type-heading" id="page_heading">PAGE</h3>
+
+              <div class="settings--core d-flex justify-content-between">
+                <div class="setting d-flex align-items-end">
+                  <input type="text" placeholder="ID" id="page_id" title="ID">
+                </div>
+  
+                <div class="setting d-flex align-items-end">
+                  <input type="text" placeholder="Label" id="page_label" title="Label">
+                </div>
+  
+                <div class="setting d-flex flex-column justify-content-end">
+                  <div>
+                    <input type="checkbox" id="page_info_exclude" checked>
+                    <label class="d-inline-block" for="page_info_exclude">Exclude</label>
+                  </div>
+                  <input type="text" placeholder="Info" id="page_info" title="Info">
+                </div>
+              </div>
+            </div>
+
+            <div class="type__body">
+              <div class="settings--actions d-flex justify-content-between">
+                <div class="add-to-schema-container d-flex justify-content-between align-items-center">
+                  <input class="add-to-schema-checkbox" type="checkbox" data-shopify-type="page" data-cat="NoDefault" id="page_add" onchange="toggleIndicator(event)">
+                  <label for="page_add">Add To Schema</label>
+                </div>
+
+                <div class="qty-container d-flex align-items-end">
+                  <label class="quantity-label" for="page_qty">Quantity</label>
+                  <input type="number" class="quantity-input" value="1" id="page_qty" min="1" onchange="quantityValidator(event)">
+                </div>
+
+                <button id="page" data-shopify-type="page" class="btn-primary" type="button" onclick="getType(event.target.id, 'no-default')">Get This Type</button>
+              </div>
+              
+            </div>
+          </div>
+
+
+
+          <!-- --------------------------------- -->
+          <!-- BLOG -->
+          <!-- Category: No Default -->
+          <!-- --------------------------------- -->
+          <div class="type type--no-default">
+            <div class="type__header">
+              <h3 class="type-heading" id="blog_heading">BLOG</h3>
+
+              <div class="settings--core d-flex justify-content-between">
+                <div class="setting d-flex align-items-end">
+                  <input type="text" placeholder="ID" id="blog_id" title="ID">
+                </div>
+  
+                <div class="setting d-flex align-items-end">
+                  <input type="text" placeholder="Label" id="blog_label" title="Label">
+                </div>
+  
+                <div class="setting d-flex flex-column justify-content-end">
+                  <div>
+                    <input type="checkbox" id="blog_info_exclude" checked>
+                    <label class="d-inline-block" for="blog_info_exclude">Exclude</label>
+                  </div>
+                  <input type="text" placeholder="Info" id="blog_info" title="Info">
+                </div>
+              </div>
+            </div>
+
+            <div class="type__body">
+              <div class="settings--actions d-flex justify-content-between">
+                <div class="add-to-schema-container d-flex justify-content-between align-items-center">
+                  <input class="add-to-schema-checkbox" type="checkbox" data-shopify-type="blog" data-cat="NoDefault" id="blog_add" onchange="toggleIndicator(event)">
+                  <label for="blog_add">Add To Schema</label>
+                </div>
+
+                <div class="qty-container d-flex align-items-end">
+                  <label class="quantity-label" for="blog_qty">Quantity</label>
+                  <input type="number" class="quantity-input" value="1" id="blog_qty" min="1" onchange="quantityValidator(event)">
+                </div>
+
+                <button id="blog" data-shopify-type="blog" class="btn-primary" type="button" onclick="getType(event.target.id, 'no-default')">Get This Type</button>
+              </div>
+              
+            </div>
+          </div>
+
+
+
+          <!-- --------------------------------- -->
+          <!-- ARTICLE -->
+          <!-- Category: No Default -->
+          <!-- --------------------------------- -->
+          <div class="type type--no-default">
+            <div class="type__header">
+              <h3 class="type-heading" id="article_heading">ARTICLE</h3>
+
+              <div class="settings--core d-flex justify-content-between">
+                <div class="setting d-flex align-items-end">
+                  <input type="text" placeholder="ID" id="article_id" title="ID">
+                </div>
+  
+                <div class="setting d-flex align-items-end">
+                  <input type="text" placeholder="Label" id="article_label" title="Label">
+                </div>
+  
+                <div class="setting d-flex flex-column justify-content-end">
+                  <div>
+                    <input type="checkbox" id="article_info_exclude" checked>
+                    <label class="d-inline-block" for="article_info_exclude">Exclude</label>
+                  </div>
+                  <input type="text" placeholder="Info" id="article_info" title="Info">
+                </div>
+              </div>
+            </div>
+
+            <div class="type__body">
+              <div class="settings--actions d-flex justify-content-between">
+                <div class="add-to-schema-container d-flex justify-content-between align-items-center">
+                  <input class="add-to-schema-checkbox" type="checkbox" data-shopify-type="article" data-cat="NoDefault" id="article_add" onchange="toggleIndicator(event)">
+                  <label for="article_add">Add To Schema</label>
+                </div>
+
+                <div class="qty-container d-flex align-items-end">
+                  <label class="quantity-label" for="article_qty">Quantity</label>
+                  <input type="number" class="quantity-input" value="1" id="article_qty" min="1" onchange="quantityValidator(event)">
+                </div>
+
+                <button id="article" data-shopify-type="article" class="btn-primary" type="button" onclick="getType(event.target.id, 'no-default')">Get This Type</button>
+              </div>
+              
+            </div>
+          </div>
+
+
+
+          <!-- --------------------------------- -->
+          <!-- FONT PICKER -->
+          <!-- Category: Standard -->
+          <!-- --------------------------------- -->
+          <div class="type type--standard">
+            <div class="type__header">
+              <h3 class="type-heading" id="font_picker_heading">FONT PICKER</h3>
+
+              <div class="settings--core d-flex justify-content-between">
+                <div class="setting d-flex align-items-end">
+                  <input type="text" placeholder="ID" id="font_picker_id" title="ID">
+                </div>
+  
+                <div class="setting d-flex align-items-end">
+                  <input type="text" placeholder="Label" id="font_picker_label" title="Label">
+                </div>
+  
+                <div class="setting d-flex flex-column justify-content-end">
+                  <div>
+                    <input type="checkbox" id="font_picker_default_exclude" checked>
+                    <label class="d-inline-block" for="font_picker_default_exclude">Exclude</label>
+                  </div>
+                  <input type="text" placeholder="Default" id="font_picker_default" title="Default">
+                </div>
+  
+                <div class="setting d-flex flex-column justify-content-end">
+                  <div>
+                    <input type="checkbox" id="font_picker_info_exclude" checked>
+                    <label class="d-inline-block" for="font_picker_info_exclude">Exclude</label>
+                  </div>
+                  <input type="text" placeholder="Info" id="font_picker_info" title="Info">
+                </div>
+              </div>
+            </div>
+
+            <div class="type__body">
+              <div class="settings--actions d-flex justify-content-between">
+                <div class="add-to-schema-container d-flex justify-content-between align-items-center">
+                  <input class="add-to-schema-checkbox" type="checkbox" data-shopify-type="font_picker" data-cat="Standard" id="font_picker_add" onchange="toggleIndicator(event)">
+                  <label for="font_picker_add">Add To Schema</label>
+                </div>
+
+                <div class="qty-container d-flex align-items-end">
+                  <label class="quantity-label" for="font_picker_qty">Quantity</label>
+                  <input type="number" class="quantity-input" value="1" id="font_picker_qty" min="1" onchange="quantityValidator(event)">
+                </div>
+
+                <button id="font_picker" data-shopify-type="font_picker" class="btn-primary" type="button" onclick="getType(event.target.id, 'standard')">Get This Type</button>
+              </div>
+            </div>
+          </div>
+
+
+
+          <!-- --------------------------------- -->
+          <!-- VIDEO -->
+          <!-- Category: Video -->
+          <!-- --------------------------------- -->
+          <div class="type type--video">
+            <div class="type__header">
+              <h3 class="type-heading" id="video_heading">VIDEO</h3>
+
+              <div class="settings--core d-flex justify-content-between">
+                <div class="setting d-flex align-items-end">
+                  <input type="text" placeholder="ID" id="video_id" title="ID">
+                </div>
+  
+                <div class="setting d-flex align-items-end">
+                  <input type="text" placeholder="Label" id="video_label" title="Label">
+                </div>
+  
+                <div class="setting d-flex flex-column justify-content-end">
+                  <div>
+                    <input type="checkbox" id="video_default_exclude" checked>
+                    <label class="d-inline-block" for="video_default_exclude">Exclude</label>
+                  </div>
+                  <input type="text" placeholder="Default" id="video_default" title="Default">
+                </div>
+  
+                <div class="setting d-flex flex-column justify-content-end">
+                  <div>
+                    <input type="checkbox" id="video_info_exclude" checked>
+                    <label class="d-inline-block" for="video_info_exclude">Exclude</label>
+                  </div>
+                  <input type="text" placeholder="Info" id="video_info" title="Info">
+                </div>
+              </div>
+            </div>
+
+            <div class="type__body">
+              <div class="settings--extra d-flex justify-content-start align-items-end">
+                <div class="setting d-flex align-items-end">
+                  <p class="settings--extra__label">Accept:</p>
+                </div>
+  
+                <div class="setting d-flex justify-content-start align-items-end">
+                  <label class="d-inline-block" for="video_accept_youtube">YouTube</label>
+                  <input type="radio" value="YouTube" name="video-accept" id="video_accept_youtube" checked>
+                </div>
+  
+                <div class="setting d-flex justify-content-start align-items-end">
+                  <label class="d-inline-block" for="video_accept_vimeo">Vimeo</label>
+                  <input type="radio" value="Vimeo" name="video-accept" id="video_accept_vimeo">
+                </div>
+  
+                <div class="setting d-flex justify-content-start align-items-end">
+                  <label class="d-inline-block" for="video_accept_both">Both</label>
+                  <input type="radio" value="Both" name="video-accept" id="video_accept_both">
+                </div>
+              </div>
+            </div>
+
+            <div class="type__footer">
+              <div class="settings--actions d-flex justify-content-between">
+                <div class="add-to-schema-container d-flex justify-content-between align-items-center">
+                  <input class="add-to-schema-checkbox" type="checkbox" data-shopify-type="video" data-cat="Video" id="video_add" onchange="toggleIndicator(event)">
+                  <label for="video_add">Add To Schema</label>
+                </div>
+
+                <div class="qty-container d-flex align-items-end">
+                  <label class="quantity-label" for="video_qty">Quantity</label>
+                  <input type="number" class="quantity-input" value="1" id="video_qty" min="1" onchange="quantityValidator(event)">
+                </div>
+
+                <button id="video" data-shopify-type="video_url" class="btn-primary" type="button" onclick="getType(event.target.id, 'video')">Get This Type</button>
+              </div>
+            </div>
+          </div>
+        
+        </div>
+
+      </section>
+
+
+      <!-- --------------------------------- -->
+      <!-- SCHEMA CODE PANE -->
+      <!-- --------------------------------- -->
+      <section class="col-6 schema-code-section">
+
+        <h2 class="code-main-heading d-inline-block">Schema Code</h2>
+        <p class="d-inline-block">Build the full schema here</p>
+
+        <div class="d-flex justify-content-start align-items-end fake-data-container">
+          <div>
+            <input type="checkbox" id="enable_placeholders" checked>
+            <label class="d-inline-block" for="enable_placeholders">Use Fake Data</label>
+          </div>
+
+          <span class="info-img" data-title="If you have entered data into the type inputs, it will always be used. Checking or unchecking this won't have any impact.">
+            <img width="20" src="img/info.svg" alt="info logo">
+          </span>
+        </div>
+
+        <div class="code-buttons-container d-flex justify-content-between align-items-end">
+          <button onclick="buildFullSchema('full-dynamic')" id="btnFullDynamic" class="btn-primary" type="button">Dynamic</button>
+          <button onclick="buildFullSchema('full-dynamic-wb')" id="btnFullDynamicWithBlocks" class="btn-primary" type="button">Dynamic w/ Blocks</button>
+          <button onclick="buildFullSchema('full-static')" id="btnFullStatic" class="btn-primary" type="button">Static</button>
+          <button onclick="buildFullSchema('full-static-wb')" id="btnFullStaticWithBlocks" class="btn-primary" type="button">Static w/ Blocks</button>
+        </div>
+
+        <div class="code__textarea-container">
+          <textarea id="schemaCode" style="resize: none;" readonly></textarea>
+        </div>
+
+      </section>
+
+    </div>
+  </main>
+</body>
+
+</html>

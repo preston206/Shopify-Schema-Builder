@@ -1,0 +1,18 @@
+
+---------------
+CHANGE LOG
+---------------
+
+
+8/11/20
+- bug fix: Range was outputing strings instead of number
+- bug fix: app was crashing when editing within the textarea. Fixed by setting textarea to readonly.
+- disabled resize for textarea
+- added a Type Picker dropdown that scrolls to the selected type
+
+
+6/2/20
+- issue #5 - fixing the video output syntax so that youtube and vimeo are displayed in all lowercase
+- updating readme
+- fixing bug within the getValue function which was outputing placeholder data for Range specs when it shouldve been random numbers; rearranging the conditions within getValue function
+- updating number inputs with min = 0 or 1
